@@ -6,23 +6,19 @@ import (
 	"sync"
 )
 
-// Bitcoin represents the amount of bitcoins in the wallet.
 type Bitcoin float64
 
-// Wallet represents a Bitcoin wallet.
 type Wallet struct {
 	balance Bitcoin
 	mutex   sync.Mutex
 }
 
-// Deposit adds funds to the wallet.
 func (w *Wallet) Deposit(amount Bitcoin) {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
 	w.balance += amount
 }
 
-// Withdraw subtracts funds from the wallet.
 func (w *Wallet) Withdraw(amount Bitcoin) error {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
@@ -33,7 +29,6 @@ func (w *Wallet) Withdraw(amount Bitcoin) error {
 	return nil
 }
 
-// Balance returns the current balance of the wallet.
 func (w *Wallet) Balance() Bitcoin {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
